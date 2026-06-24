@@ -27,6 +27,11 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Barlow', sans-serif; background: var(--chalk); color: var(--mud); }
 
+@media (min-width: 760px) {
+  body { background: #DEDDD5; }
+  main { max-width: 900px; margin-left: auto; margin-right: auto; background: var(--chalk); box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+}
+
 /* ── HEADER ── */
 header {
   background: var(--grass);
@@ -35,10 +40,15 @@ header {
   position: relative;
   overflow: hidden;
 }
-header::before {
+.inner {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+}
+.inner::before {
   content: '🛡';
   position: absolute;
-  right: 16px; top: 50%;
+  right: 0; top: 50%;
   transform: translateY(-50%);
   font-size: 72px;
   opacity: 0.10;
@@ -90,6 +100,9 @@ header h1 span { color: var(--lime); }
   scrollbar-width: none;
 }
 .phase-nav::-webkit-scrollbar { display: none; }
+@media (min-width: 760px) {
+  .phase-nav { justify-content: center; }
+}
 .phase-btn {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px; font-weight: 700;
@@ -290,14 +303,16 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
 <body>
 
 <header>
-  <div class="h-eyebrow">Coach's Playbook · Covenant Classical Warriors Soccer</div>
-  <h1>Train Hard.<br><span>Play Together.</span><br>Honor God.</h1>
-  <div class="h-verse">"Whatever you do, work at it with all your heart, as working for the Lord." — Col. 3:23</div>
-  <div class="h-meta">
-    <span class="h-chip">Warriors · Grades 6–8</span>
-    <span class="h-chip">1-Hour Sessions</span>
-    <span class="h-chip">Mixed Skill Levels</span>
-    <span class="h-chip">3×/Week → In-Season</span>
+  <div class="inner">
+    <div class="h-eyebrow">Coach's Playbook · Covenant Classical Warriors Soccer</div>
+    <h1>Train Hard.<br><span>Play Together.</span><br>Honor God.</h1>
+    <div class="h-verse">"Whatever you do, work at it with all your heart, as working for the Lord." — Col. 3:23</div>
+    <div class="h-meta">
+      <span class="h-chip">Warriors · Grades 6–8</span>
+      <span class="h-chip">1-Hour Sessions</span>
+      <span class="h-chip">Mixed Skill Levels</span>
+      <span class="h-chip">3×/Week → In-Season</span>
+    </div>
   </div>
 </header>
 
