@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Covenant Classical Warriors — Coach's Playbook</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap');
+
+:root {
+  --grass: #1A1A1A;
+  --grass-mid: #2B2B2B;
+  --lime: #E63232;
+  --chalk: #F4F3EE;
+  --mud: #141414;
+  --sky: #8C8C8C;
+  --orange: #E63232;
+  --gold: #B8141F;
+  --white: #FFFFFF;
+  --gray: #6E6E6E;
+  --light-gray: #E2E2DA;
+  --red: #C8102E;
+  --beginner: #6E6E6E;
+  --advanced: #C8102E;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Barlow', sans-serif; background: var(--chalk); color: var(--mud); }
+
+/* ── HEADER ── */
+header {
+  background: var(--grass);
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 40px, transparent 40px 80px);
+  padding: 28px 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '🛡';
+  position: absolute;
+  right: 16px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 72px;
+  opacity: 0.10;
+  line-height: 1;
+}
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 4px;
+  background: repeating-linear-gradient(90deg, var(--lime) 0 8px, transparent 8px 16px);
+}
+.h-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--lime); margin-bottom: 6px;
+}
+header h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(26px,6vw,46px); font-weight: 900;
+  color: #fff; line-height: 1; text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+header h1 span { color: var(--lime); }
+.h-verse {
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+  max-width: 340px;
+}
+.h-meta {
+  margin-top: 10px;
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.h-chip {
+  font-size: 11px; font-weight: 600;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.85);
+  padding: 3px 10px; border-radius: 20px;
+}
+
+/* ── NAV ── */
+.phase-nav {
+  background: var(--mud);
+  display: flex; overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.phase-nav::-webkit-scrollbar { display: none; }
+.phase-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  background: none; border: none;
+  border-bottom: 3px solid transparent;
+  padding: 13px 16px; cursor: pointer;
+  white-space: nowrap; flex-shrink: 0;
+  transition: color .2s, border-color .2s;
+}
+.phase-btn.active { color: var(--lime); border-bottom-color: var(--lime); }
+.phase-btn:hover:not(.active) { color: #fff; }
+
+/* ── MAIN ── */
+main { padding: 16px 14px 48px; max-width: 720px; margin: 0 auto; }
+.phase-panel { display: none; }
+.phase-panel.active { display: block; }
+
+/* ── PHASE INTRO ── */
+.phase-intro {
+  background: var(--grass);
+  color: #fff; border-radius: 10px;
+  padding: 16px 18px; margin-bottom: 18px;
+}
+.pi-tag {
+  display: inline-block;
+  background: var(--lime); color: var(--mud);
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 2px; margin-bottom: 7px;
+}
+.phase-intro h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  margin-bottom: 5px;
+}
+.phase-intro p { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+/* ── INFO BOXES ── */
+.info-box {
+  border-radius: 8px; padding: 14px 16px; margin-bottom: 14px;
+}
+.info-box.dark { background: var(--mud); color: #fff; }
+.info-box.gold { background: #FBEAEC; border-left: 4px solid var(--gold); }
+.info-box.sky { background: #F0F0F0; border-left: 4px solid var(--sky); }
+.info-box h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.info-box.dark h3 { color: var(--lime); }
+.info-box.gold h3 { color: #8C0F22; }
+.info-box.sky h3 { color: #3A3A3A; }
+.info-box ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.info-box li {
+  font-size: 13px; line-height: 1.4;
+  padding-left: 14px; position: relative;
+}
+.info-box.dark li { color: rgba(255,255,255,0.85); }
+.info-box.dark li::before { content: '▸'; position: absolute; left: 0; color: var(--lime); }
+.info-box.gold li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 10px; top: 2px; }
+.info-box.sky li::before { content: '→'; position: absolute; left: 0; color: var(--sky); }
+
+/* ── WEEK LABEL ── */
+.week-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gray);
+  margin: 22px 0 9px;
+  display: flex; align-items: center; gap: 8px;
+}
+.week-label::after { content: ''; flex: 1; height: 1px; background: var(--light-gray); }
+.week-theme {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 20px;
+  background: var(--grass); color: var(--lime);
+  flex-shrink: 0;
+}
+
+/* ── SESSION CARDS ── */
+.session-card {
+  background: #fff; border-radius: 10px;
+  margin-bottom: 10px; overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+}
+.session-header {
+  display: flex; align-items: center;
+  padding: 12px 14px; cursor: pointer;
+  user-select: none; gap: 10px;
+}
+.s-day {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #fff; padding: 3px 8px; border-radius: 3px;
+  flex-shrink: 0;
+}
+.s-day.training { background: var(--orange); }
+.s-day.game { background: var(--sky); }
+.s-day.culture { background: var(--grass); }
+.s-day.tips { background: var(--gray); }
+.s-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.03em;
+  flex: 1; line-height: 1.2;
+}
+.s-toggle { font-size: 16px; color: var(--gray); transition: transform .25s; flex-shrink: 0; }
+.session-card.open .s-toggle { transform: rotate(180deg); }
+.session-body { display: none; border-top: 1px solid var(--light-gray); padding: 14px; }
+.session-card.open .session-body { display: block; }
+
+/* ── SKILL LEVEL LEGEND ── */
+.level-legend {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.level-pill {
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px;
+  letter-spacing: 0.06em;
+}
+.level-pill.all { background: #EEF0E8; color: var(--mud); }
+.level-pill.beg { background: #F0F0F0; color: #3A3A3A; border: 1.5px solid var(--sky); }
+.level-pill.adv { background: #FBE4E7; color: #8C0F22; border: 1.5px solid var(--orange); }
+
+/* ── DRILL BLOCKS ── */
+.drill-block {
+  display: flex; gap: 10px;
+  margin-bottom: 13px; align-items: flex-start;
+}
+.drill-block:last-child { margin-bottom: 0; }
+.drill-time {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--grass-mid); min-width: 34px;
+  padding-top: 2px; flex-shrink: 0;
+}
+.drill-content { flex: 1; }
+.drill-name {
+  font-weight: 600; font-size: 14px; margin-bottom: 2px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.drill-badge {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 1px 6px; border-radius: 10px;
+}
+.drill-badge.beg { background: #F0F0F0; color: #3A3A3A; }
+.drill-badge.adv { background: #FBE4E7; color: #8C0F22; }
+.drill-badge.all { background: #EEF0E8; color: #444; }
+.drill-detail { font-size: 13px; color: #444; line-height: 1.55; }
+.drill-tip { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--orange); }
+.drill-tip::before { content: '💡 '; }
+.drill-faith { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--grass-mid); font-style: italic; }
+.drill-faith::before { content: '✝ '; }
+hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0; }
+
+/* ── DIFF TABLE ── */
+.diff-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+.diff-table th {
+  background: var(--mud); color: #fff;
+  padding: 6px 10px; text-align: left;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.diff-table td { padding: 7px 10px; border-bottom: 1px solid var(--light-gray); line-height: 1.4; }
+.diff-table tr:last-child td { border-bottom: none; }
+.diff-table td:first-child { font-weight: 600; color: var(--grass); width: 90px; }
+.diff-table td.beg-col { background: #F4F4F4; }
+.diff-table td.adv-col { background: #FBEAEC; }
+
+/* ── VERSE CARD ── */
+.verse-card {
+  background: linear-gradient(135deg, var(--grass) 0%, #000000 100%);
+  border-radius: 10px; padding: 16px 18px;
+  margin-bottom: 10px; color: #fff;
+  text-align: center;
+}
+.verse-card .vc-verse {
+  font-size: 15px; font-style: italic; line-height: 1.6;
+  margin-bottom: 6px;
+}
+.verse-card .vc-ref {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--lime);
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-eyebrow">Coach's Playbook · Covenant Classical Warriors Soccer</div>
+  <h1>Train Hard.<br><span>Play Together.</span><br>Honor God.</h1>
+  <div class="h-verse">"Whatever you do, work at it with all your heart, as working for the Lord." — Col. 3:23</div>
+  <div class="h-meta">
+    <span class="h-chip">Warriors · Grades 6–8</span>
+    <span class="h-chip">1-Hour Sessions</span>
+    <span class="h-chip">Mixed Skill Levels</span>
+    <span class="h-chip">3×/Week → In-Season</span>
+  </div>
+</header>
+
+<nav class="phase-nav">
+  <button class="phase-btn active" onclick="showPhase('pre1')">Week 1</button>
+  <button class="phase-btn" onclick="showPhase('pre2')">Week 2</button>
+  <button class="phase-btn" onclick="showPhase('pre3')">Week 3</button>
+  <button class="phase-btn" onclick="showPhase('season')">In-Season</button>
+  <button class="phase-btn" onclick="showPhase('culture')">Culture &amp; Faith</button>
+  <button class="phase-btn" onclick="showPhase('coach')">Coach Notes</button>
+</nav>
+
+<main>
+
+<!-- ========= WEEK 1 ========= -->
+<div id="phase-pre1" class="phase-panel active">
+
+  <div class="phase-intro">
+    <div class="pi-tag">Pre-Season · Week 1 of 3</div>
+    <h2>Foundation Week</h2>
+    <p>Establish culture, learn each other, and build the basics. Everyone starts fresh here — that's the point. High energy, short lines, lots of touches.</p>
+  </div>
+
+  <div class="info-box sky">
+    <h3>🏅 How Skill Differentiation Works</h3>
+    <ul>
+      <li><strong style="color:#3A3A3A">◉ Beginner track</strong> — simplified version of every drill, more reps, more coaching attention</li>
+      <li><strong style="color:#8C0F22">◉ Advanced track</strong> — added constraints (fewer touches, speed, pressure, weak foot)</li>
+      <li>Small-sided games mix skill levels intentionally — more-experienced players must <em>make teammates better</em></li>
+    </ul>
+  </div>
+
+  <div class="info-box dark">
+    <h3>Every Session Structure</h3>
+    <ul>
+      <li><strong>0–5 min</strong> — Team Huddle: energy-setter, verse, chant</li>
+      <li><strong>5–15 min</strong> — Dynamic Warm-Up (ball at feet)</li>
+      <li><strong>15–40 min</strong> — Technical Focus (differentiated by level)</li>
+      <li><strong>40–55 min</strong> — Competitive Game (mixed teams)</li>
+      <li><strong>55–60 min</strong> — Cool-Down + Devotional Moment</li>
+    </ul>
+  </div>
+
+  <div class="week-label">Session 1 <span class="week-theme">First Touch &amp; Passing</span></div>
+
+  <div class="session-card open" id="w1s1">
+    <div class="session-header" onclick="toggle('w1s1')">
+      <span class="s-day training">Day 1</span>
+      <span class="s-title">First Touch + Passing Gates</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle</div>
+          <div class="drill-detail">Bring it in tight. Introduce yourself and your 3 team rules (effort, encouragement, excellence). Read Col. 3:23. Ask: "What does it mean to work for the Lord on a soccer field?" Take 2 quick answers. End with team chant — let them suggest one. First one wins for the season.</div>
+          <div class="drill-faith">Set the tone: this team works hard because of who we represent, not just what we want to win.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Warm-Up: Dribble Maze <span class="drill-badge all">Everyone</span></div>
+          <div class="drill-detail">Every player has a ball in a 20×20 grid. Coach calls commands: <em>Red light</em> (sole stop), <em>Green light</em> (dribble), <em>Blue</em> (inside turn), <em>Yellow</em> (outside chop). Gradually increase speed. Ends with 1 minute of freestyle — show your best move.</div>
+          <div class="drill-tip">This tells you everything. Watch who has natural comfort with the ball. Note the beginners — they'll need you near them in the next block.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–35</div>
+        <div class="drill-content">
+          <div class="drill-name">Passing Gates (Differentiated)</div>
+          <div class="drill-detail">Scatter 10 cone gates (2 cones, 2 yds apart) across the field. Pairs pass through as many gates as possible in 4 minutes. Track completions. Then beat your score.</div>
+          <br>
+          <table class="diff-table">
+            <tr><th></th><th class="beg-col">◉ Beginner</th><th class="adv-col">◉ Advanced</th></tr>
+            <tr><td>Distance</td><td class="beg-col">5–8 yd passes, wide gates</td><td class="adv-col">10–15 yds, narrow gates</td></tr>
+            <tr><td>Touch rule</td><td class="beg-col">Unlimited touches</td><td class="adv-col">2 touches max (receive + pass)</td></tr>
+            <tr><td>Foot</td><td class="beg-col">Dominant foot fine</td><td class="adv-col">Must alternate feet each pass</td></tr>
+            <tr><td>Challenge</td><td class="beg-col">Beat your last score</td><td class="adv-col">One-touch through 3 gates in a row</td></tr>
+          </table>
+          <div class="drill-tip">Pair one beginner with one more experienced player. The experienced player practices leadership + weak foot. The beginner gets a mentor, not a lecture.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">35–40</div>
+        <div class="drill-content">
+          <div class="drill-name">Rondo: 4v1 <span class="drill-badge all">Everyone</span></div>
+          <div class="drill-detail">Groups of 5 in a circle (~8 yds). 4 keep possession from 1 defender. Last passer when defender wins it goes in the middle. Played for 5 minutes. Great equalizer — even beginners can succeed with positioning.</div>
+          <div class="drill-tip">Coach beginners to "show for the ball" (open body, in space). They don't need skill yet — they need positioning habits.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">40–55</div>
+        <div class="drill-content">
+          <div class="drill-name">4v4 Passing Game <span class="drill-badge all">Mixed Teams</span></div>
+          <div class="drill-detail">30×20 yd grid. Score by passing through a cone gate (no shooting). Must complete 3 passes before scoring. Mix skill levels on each team. Rotate teams every 6 minutes.</div>
+          <div class="drill-detail" style="margin-top:6px"><strong>Advanced add-on:</strong> If your team completes 5 passes in a row, next gate counts as 2 points. Encourages patience even for the strongest players.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Cool-Down Circle</div>
+          <div class="drill-detail">Light quad and hamstring stretch. Go around the circle: each player says their name and one word for how they feel. Coach closes: "I saw effort from everyone today. That's what we're about." Optional: 10-second moment of silence as a team before the chant.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="session-card" id="w1s2">
+    <div class="session-header" onclick="toggle('w1s2')">
+      <span class="s-day training">Day 2</span>
+      <span class="s-title">Dribbling &amp; 1v1 Moves</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle</div>
+          <div class="drill-detail">Quick accountability: "Who practiced juggling since yesterday?" (No shame if no one did — just plant the seed.) High energy — clap it up, get loud. Today's verse: Proverbs 27:17 — "As iron sharpens iron, so one person sharpens another." Frame: "Today we push each other to be better."</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Warm-Up: Cone Slalom + Juggling Station <span class="drill-badge all">Split</span></div>
+          <div class="drill-detail">Half the team does a slalom course through 6 cones (20 yds), time themselves, try to beat their time. Other half does juggle challenge (count their best). Swap after 5 mins. Every player gets a number — encourage them to write it down and beat it by end of season.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–35</div>
+        <div class="drill-content">
+          <div class="drill-name">Move of the Day: The Cut-Back Turn (Differentiated)</div>
+          <div class="drill-detail">Everyone learns the same move: dribble toward a cone, inside foot chop back, accelerate away. Walk-through → slow → full speed. Then line drill attacking a standing coach.</div>
+          <br>
+          <table class="diff-table">
+            <tr><th></th><th class="beg-col">◉ Beginner</th><th class="adv-col">◉ Advanced</th></tr>
+            <tr><td>Approach</td><td class="beg-col">Slow dribble, wide setup</td><td class="adv-col">Sprint approach, tight space</td></tr>
+            <tr><td>Defender</td><td class="beg-col">Cone only (stationary)</td><td class="adv-col">Live defender (light pressure)</td></tr>
+            <tr><td>Finish</td><td class="beg-col">No finish required — just the turn</td><td class="adv-col">Turn + shot on goal immediately</td></tr>
+            <tr><td>Bonus</td><td class="beg-col">Try with non-dominant foot once</td><td class="adv-col">Must finish with non-dominant foot</td></tr>
+          </table>
+          <div class="drill-tip">For beginners: slow it down. The move feels unnatural until it suddenly clicks. Celebrate that click loudly when it happens.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">35–45</div>
+        <div class="drill-content">
+          <div class="drill-name">King of the Square <span class="drill-badge all">Everyone</span></div>
+          <div class="drill-detail">10×10 yd grids. Pairs: attacker tries to dribble across the defender's end line; defender tries to knock the ball out. 45 seconds per matchup. Rotate winners to new grids. Run simultaneously — everyone is playing at the same time, no standing in line.</div>
+          <div class="drill-detail" style="margin-top:5px"><strong>Beginner tweak:</strong> Defender can only shuffle side-to-side (no tackling yet). Builds attacker confidence first.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">45–55</div>
+        <div class="drill-content">
+          <div class="drill-name">5v5 Dribble-to-Score Game <span class="drill-badge all">Mixed Teams</span></div>
+          <div class="drill-detail">Goals replaced by end lines — score by dribbling over the line (no shooting). Rewards ball carriers. Advanced players challenged to use the cut-back in game; beginners just encouraged to drive forward with confidence.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Debrief + Verse Response</div>
+          <div class="drill-detail">Calf stretch. "Who sharpened someone today?" — call out a teammate who made you better. Quick moment. Coach affirms: "That's a team. Let's go." Chant out.</div>
+          <div class="drill-faith">Iron sharpens iron — the strongest players lifting everyone else is a kingdom principle, not just a soccer one.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="session-card" id="w1s3">
+    <div class="session-header" onclick="toggle('w1s3')">
+      <span class="s-day training">Day 3</span>
+      <span class="s-title">Shooting &amp; Finishing</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle</div>
+          <div class="drill-detail">Energy check: "0–10, what's the team's intensity right now?" Whatever they say — challenge them to make it a 10 by the end. Verse: Philippians 4:13. "Everything we do today — with Him."</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Pass-and-Move Warm-Up</div>
+          <div class="drill-detail">Two lines at midfield cones. Pass across, follow your pass. After 3 minutes add: sprint to a wide cone after passing, then rejoin opposite line. Gets blood flowing with a ball involved.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–35</div>
+        <div class="drill-content">
+          <div class="drill-name">Shooting Circuit (3 Stations, 5 min each)</div>
+          <div class="drill-detail">Quick technique reminder: plant foot beside ball, strike with laces, follow through low. "Pick a corner — always have a target."</div>
+          <br>
+          <table class="diff-table">
+            <tr><th>Station</th><th class="beg-col">◉ Beginner</th><th class="adv-col">◉ Advanced</th></tr>
+            <tr><td>① Straight shot</td><td class="beg-col">12 yds, stationary ball, focus on technique</td><td class="adv-col">18–20 yds, driven shot, pick corner</td></tr>
+            <tr><td>② Rolling ball</td><td class="beg-col">Coach rolls slowly, player approaches and shoots</td><td class="adv-col">First-time finish, no second touch allowed</td></tr>
+            <tr><td>③ Turn &amp; shoot</td><td class="beg-col">Receive to feet, take a touch, then shoot</td><td class="adv-col">Back to goal, receive, spin, finish in one motion</td></tr>
+          </table>
+          <div class="drill-tip">Beginners: repetition over difficulty. 3 successful techniques beat 1 flashy attempt. Get the basics grooved.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">35–45</div>
+        <div class="drill-content">
+          <div class="drill-name">3v1 into Goal <span class="drill-badge all">Mixed</span></div>
+          <div class="drill-detail">3 attackers (1 advanced + 2 beginners or all mixed) vs 1 defender + GK. Start at midfield. Emphasis: advanced player sets teammates up — not a solo show. Award bonus point if a beginner scores.</div>
+          <div class="drill-tip">The advanced player being a facilitator teaches them the most valuable skill at this level: making others better. Coach it explicitly: "You're the engine. They're the finishers today."</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">45–55</div>
+        <div class="drill-content">
+          <div class="drill-name">First Full Scrimmage</div>
+          <div class="drill-detail">Let them play. Minimal coaching. Watch. Take mental notes on natural positions, competitiveness, attitude. Who encourages? Who gets frustrated? Who tracks back? You're reading the team, not correcting it yet.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">End of Week 1 Moment</div>
+          <div class="drill-detail">Team circle. "What's one thing God is teaching you through being on this team?" (No pressure — just offer it.) Coach shares something too. High-five line. Chant out loud.</div>
+          <div class="drill-faith">End-of-week moments build a culture that outlasts the season. Even the players who don't engage much are watching how this goes.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ========= WEEK 2 ========= -->
+<div id="phase-pre2" class="phase-panel">
+
+  <div class="phase-intro">
+    <div class="pi-tag">Pre-Season · Week 2 of 3</div>
+    <h2>Defense, Shape &amp; Transition</h2>
+    <p>Now that everyone has had touches on the ball, teach the team how to win it back and how to strike fast when they do. Defense is how you compete — even with beginners.</p>
+  </div>
+
+  <div class="info-box gold">
+    <h3>⚡ Week 2 Focus: Competitive Edge</h3>
+    <ul>
+      <li>Beginners: learn <em>where</em> to be. Positioning is coachable — skill takes time.</li>
+      <li>Advanced: lead by example under pressure. Add constraints to keep them challenged.</li>
+      <li>Theme verse for the week: <em>"Be strong and courageous." — Joshua 1:9</em></li>
+    </ul>
+  </div>
+
+  <div class="week-label">Session 4 <span class="week-theme">Defensive Stance &amp; Pressure</span></div>
+
+  <div class="session-card" id="w2s1">
+    <div class="session-header" onclick="toggle('w2s1')">
+      <span class="s-day training">Day 4</span>
+      <span class="s-title">Defending: Delay, Don't Dive</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle</div>
+          <div class="drill-detail">Joshua 1:9 — "Be strong and courageous." Frame it: "Defending takes courage. You're going to stand your ground today. That's not natural — but it's how good teams win." Chant to open.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Shadow Defensive Footwork</div>
+          <div class="drill-detail">Pairs. One dribbles slowly. Partner stays in low defensive stance, 1 yd in front, mirroring. No tackling — just stay in front. Switch every 90 sec. Focus: <em>toes, knees bent, goalside, eyes on the ball</em>. Do it 3 rounds, then add: defender tries to force attacker left (their weak side).</div>
+          <div class="drill-tip">For beginners: this is their moment. Defending is about positioning, not athleticism. They can be great at this fast.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–35</div>
+        <div class="drill-content">
+          <div class="drill-name">1v1 Defending Drill (Differentiated)</div>
+          <div class="drill-detail">Attacker starts 20 yds from goal, defender 5 yds away. Defender's only job: slow the attack, stay on feet, force to the weak side. Not to win the ball. 10 reps per pair.</div>
+          <br>
+          <table class="diff-table">
+            <tr><th></th><th class="beg-col">◉ Beginner Defender</th><th class="adv-col">◉ Advanced Defender</th></tr>
+            <tr><td>Goal</td><td class="beg-col">Stay in front for 5 seconds</td><td class="adv-col">Win the ball cleanly without fouling</td></tr>
+            <tr><td>Attacker speed</td><td class="beg-col">Walk/jog pace</td><td class="adv-col">Full speed</td></tr>
+            <tr><td>Success</td><td class="beg-col">No lunge = success</td><td class="adv-col">Force to weak side AND win ball</td></tr>
+          </table>
+          <div class="drill-tip">Loudly praise the patient defender. "That's exactly it — he made it hard without diving. That wins games."</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">35–45</div>
+        <div class="drill-content">
+          <div class="drill-name">Team Shape Walk-Through (No Ball)</div>
+          <div class="drill-detail">Put everyone in your basic defensive formation. Walk through: pressure, cover, balance. Move them around by calling "ball goes left"... "ball switches"... "cross comes in." Like a chess drill. Do it 3× from different starting points. It will feel slow — that's fine. Muscle memory starts here.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">45–55</div>
+        <div class="drill-content">
+          <div class="drill-name">5v5 Defensive Points Game</div>
+          <div class="drill-detail">Score system: 1 pt for tackling and keeping possession, 2 pts for a GK save + distribution, 3 pts for a clean 2-minute defensive period, 1 pt for a goal. Changes the mindset from goals-only to total performance.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Cool-Down</div>
+          <div class="drill-detail">Glute stretch, quad. Discuss: "What's the difference between courage and recklessness in defending?" One or two answers. Short prayer of thanks for the practice, then chant out.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="w2s2">
+    <div class="session-header" onclick="toggle('w2s2')">
+      <span class="s-day training">Day 5</span>
+      <span class="s-title">Transition &amp; Counterattack</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle</div>
+          <div class="drill-detail">"How many goals are scored within 10 seconds of winning the ball? Most of them." Today is about being dangerous the moment you get possession. Hustle culture starts NOW.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Agility Warm-Up + Sprint Bursts</div>
+          <div class="drill-detail">Cone patterns (or ladder if available): 2-feet-in, lateral shuffle, in-out. Then 4× 20 yd sprint at 80% — recovery walk back. Fast session needs primed legs.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–35</div>
+        <div class="drill-content">
+          <div class="drill-name">Transition Game: Win It, Use It</div>
+          <div class="drill-detail">3v3 in 25×20 grid, two small goals. Rule: when possession changes, the new team must get a shot within 6 seconds or possession resets. Teaches immediate forward thinking.</div>
+          <br>
+          <table class="diff-table">
+            <tr><th></th><th class="beg-col">◉ Beginner</th><th class="adv-col">◉ Advanced</th></tr>
+            <tr><td>Time limit</td><td class="beg-col">8 seconds to shoot</td><td class="adv-col">4 seconds to shoot</td></tr>
+            <tr><td>First action</td><td class="beg-col">Just advance the ball forward</td><td class="adv-col">Must switch direction before shooting</td></tr>
+          </table>
+          <div class="drill-tip">Advanced players: remind them the constraint exists so they can't just overpower beginners. They must be faster and smarter.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">35–45</div>
+        <div class="drill-content">
+          <div class="drill-name">3v2 Counterattack Waves</div>
+          <div class="drill-detail">3 attackers at midfield, 2 defenders at the 18. Coach passes, attackers go immediately. Emphasize: wide players stay wide, ball carrier commits the defender, pass early. After each rep, 2 attackers become defenders for the next wave.</div>
+          <div class="drill-detail" style="margin-top:5px"><strong>Role assignment:</strong> Put beginners as wide runners — gives them clear, achievable roles (stay wide, run the channel). Advanced player plays #9, making decisions under pressure.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">45–55</div>
+        <div class="drill-content">
+          <div class="drill-name">Scrimmage — Transition Focus</div>
+          <div class="drill-detail">Normal scrimmage. Coach stops play maximum 3 times — only to highlight transition moments (good or missed). Keep the flow. Let them feel the speed.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Cool-Down</div>
+          <div class="drill-detail">Hip flexors, calves. One word each: how did the team's hustle feel? Coach response to what they say. Chant out.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="w2s3">
+    <div class="session-header" onclick="toggle('w2s3')">
+      <span class="s-day training">Day 6</span>
+      <span class="s-title">Set Pieces + Team Identity</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle — Team Roles</div>
+          <div class="drill-detail">Announce starting to think about positions. Ask players what position they want to play and why. Make notes. Verse: Romans 12:4–5 — "Just as each of us has one body with many members, and these members do not all have the same function..." Frame it: "Every role matters. The team needs everyone."</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Warm-Up Rondo 5v2</div>
+          <div class="drill-detail">5 keep-away vs 2 in the middle in a 12-yd circle. Two-touch max. Defenders win a point for every ball won in under 8 passes. Run 3 rounds of 2 minutes each. High energy.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–30</div>
+        <div class="drill-content">
+          <div class="drill-name">Corner Kicks — 2 Plays</div>
+          <div class="drill-detail"><strong>Play 1 (Near-post flick):</strong> One runner attacks near post, everyone else creates space. Simple. Put advanced player as corner taker.<br><br><strong>Play 2 (Short corner):</strong> Ball to player at edge of box, cross from wider angle. Beginners learn runner routes; advanced learn delivery.<br><br>5 reps each, both sides. Defenders set up to create realistic pressure.</div>
+          <div class="drill-tip">Keep it 2 plays. At this age, 5 plays = 0 plays. Two they own beats five they've heard.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">30–45</div>
+        <div class="drill-content">
+          <div class="drill-name">Free Kicks + Wall Practice</div>
+          <div class="drill-detail">Kicks from 20–25 yds. Teach wall setup: 3–4 players, GK covers far post. Rotate who takes kicks — don't only give it to the advanced players. Beginners get reps too, even if the execution isn't perfect. After 8 attempts, practice crossing free kicks with runners attacking.</div>
+          <div class="drill-tip">Beginners taking free kicks in practice = confidence in games. The skill grows if they get reps.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">45–55</div>
+        <div class="drill-content">
+          <div class="drill-name">Scrimmage w/ Set Piece Triggers</div>
+          <div class="drill-detail">When a corner or free kick is earned, pause and run the actual play. Real-game reps in context.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">End of Week 2 + Captain Vote</div>
+          <div class="drill-detail">Stretch circle. Quietly hold up fingers to vote for team captain(s). Announce result. Let captain say something. Close with a prayer led by coach or volunteer player. Week 2 chant out.</div>
+          <div class="drill-faith">Shared prayer, even brief, builds the kind of trust teams need to compete together under pressure.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========= WEEK 3 ========= -->
+<div id="phase-pre3" class="phase-panel">
+
+  <div class="phase-intro">
+    <div class="pi-tag">Pre-Season · Week 3 of 3</div>
+    <h2>Game-Ready Week</h2>
+    <p>Put everything together. Simulate real game scenarios, establish your lineup, and build confidence heading into the season. Game week starts now.</p>
+  </div>
+
+  <div class="info-box gold">
+    <h3>🎯 Week 3 Goals</h3>
+    <ul>
+      <li>Beginners: know their position, know 1 set piece role, feel confident enough to compete</li>
+      <li>Advanced: lead on the field, communicate, take responsibility</li>
+      <li>Team: know your 3 principles. Run your 2 set pieces. Trust each other.</li>
+    </ul>
+  </div>
+
+  <div class="week-label">Session 7 <span class="week-theme">Possession + Shape Under Pressure</span></div>
+
+  <div class="session-card" id="w3s1">
+    <div class="session-header" onclick="toggle('w3s1')">
+      <span class="s-day training">Day 7</span>
+      <span class="s-title">Possession &amp; Playing Out of the Back</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle</div>
+          <div class="drill-detail">"Week 3. Game week is coming. Who's ready?" High energy call-and-response. Verse: 2 Timothy 1:7 — "For God has not given us a spirit of fear, but of power, love, and self-discipline." "No panic-kicking. No fear. Today we play brave soccer."</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Rondo 6v2 — Possession Warm-Up</div>
+          <div class="drill-detail">6 keep-away vs 2 in 15×15 grid. Team of 6 earns a point every 10 consecutive passes. Two-touch limit for all. Changes every 3 minutes. Gets everyone's head up and passing sharp.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–35</div>
+        <div class="drill-content">
+          <div class="drill-name">Building Out of the Back (Differentiated)</div>
+          <div class="drill-detail">Half-field. GK + 3 defenders build against 2 high-press attackers. Goal: play the ball past the midfield line without hoofing it.</div>
+          <br>
+          <table class="diff-table">
+            <tr><th></th><th class="beg-col">◉ Beginner Defenders</th><th class="adv-col">◉ Advanced Defenders</th></tr>
+            <tr><td>Press speed</td><td class="beg-col">Attackers press at 50% speed</td><td class="adv-col">Full press, game speed</td></tr>
+            <tr><td>Success</td><td class="beg-col">Ball reaches midfield any way</td><td class="adv-col">Must maintain possession through midfield</td></tr>
+            <tr><td>GK</td><td class="beg-col">Can hold 5 seconds before distributing</td><td class="adv-col">Must distribute in 3 seconds</td></tr>
+          </table>
+          <div class="drill-tip">Praise the brave short pass under pressure every time. That's the behavior that wins games when it's 1–1 in the second half.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">35–55</div>
+        <div class="drill-content">
+          <div class="drill-name">Full 7v7 or 8v8 Match Simulation</div>
+          <div class="drill-detail">Use your formation and actual positions. Coach from the sideline only — no stepping onto the field. Allow 4–5 stoppages maximum. Focus stoppages only on your 3 team principles. Let them problem-solve in real time.</div>
+          <div class="drill-detail" style="margin-top:5px">After each stoppage ask the players first: "What should we have done there?" Then reinforce the right answer.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Pre-Game Culture Setup</div>
+          <div class="drill-detail">"What are our 3 team rules?" — players say them. "What are our 3 team principles on the field?" — players say them. Write them somewhere visible. Ownership is everything.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="w3s2">
+    <div class="session-header" onclick="toggle('w3s2')">
+      <span class="s-day training">Day 8</span>
+      <span class="s-title">GK + Defensive Shape + Full Scrimmage</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle</div>
+          <div class="drill-detail">Captain leads the huddle today. Coach steps back. Verse is captain's choice (gave them one to prep: Psalm 133:1 — "How good and pleasant it is when brothers dwell in unity"). Captain gives 1 minute of fire. You just watch.</div>
+          <div class="drill-faith">Transferring leadership to the captain builds team ownership. The captain needs reps leading before game day.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Split: GK Work + Team Defensive Shape</div>
+          <div class="drill-detail"><strong>GK (with assistant or coach helper):</strong> Diving saves low both sides (5 each), distribution (punt, throw, goal kick), command of cross. 2 players rotate through GK reps for development.<br><br><strong>Outfield (you):</strong> 6 players in defensive shape, no ball. Call out "ball left," "switch," "cross coming" — unit shifts together. Walk-through → game pace. 3 rounds.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–35</div>
+        <div class="drill-content">
+          <div class="drill-name">Compact Defending vs Attack (8v8)</div>
+          <div class="drill-detail">8 vs 8 on 3/4 field. Defending team keeps shape and defends deep — goal is to not concede for 4 minutes. Attacking team gets possession and must break down a set block. Swap roles every 4 min. Advanced players play in key defensive roles; beginners fill in a set position and hold it.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">35–55</div>
+        <div class="drill-content">
+          <div class="drill-name">Full Coached Scrimmage</div>
+          <div class="drill-detail">Last big scrimmage before game week. 4–5 coaching stoppages max. Focus only on your top 2 corrections — not everything. Let them find solutions. GK rotates at halftime.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Every Player Shout-Out</div>
+          <div class="drill-detail">Go around the circle — coach calls each player's name and says one specific strength they showed in the last 2 weeks. Every. Single. Player. Prepare this in advance. Don't wing it. This is powerful for the kids who aren't the stars.</div>
+          <div class="drill-faith">Every player being seen and called by name — that's more than a coaching technique. It's ministry.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="w3s3">
+    <div class="session-header" onclick="toggle('w3s3')">
+      <span class="s-day training">Day 9</span>
+      <span class="s-title">Final Prep — Light, Sharp &amp; Ready</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle — Game Week</div>
+          <div class="drill-detail">High energy. "We have been preparing. We are ready. Whatever happens in that first game, we compete with everything we have — for each other and for God." Verse: Colossians 3:23 again — full circle to Day 1. Chant.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Fun Warm-Up: Team Juggling World Cup</div>
+          <div class="drill-detail">Everyone juggles. Drop = sit down (but keep counting from where you left off individually). Last one wins nothing — just pride. Coach tries too. Guaranteed laughs. Gets the energy right.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–25</div>
+        <div class="drill-content">
+          <div class="drill-name">Set Piece Review — No Pressure</div>
+          <div class="drill-detail">Walk through corners and free kicks. 3 reps each. No coaching — just reinforcing memory. If they do it wrong, just say "again" calmly. They know it by now.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">25–48</div>
+        <div class="drill-content">
+          <div class="drill-name">Light Possession + Penalty Shootout</div>
+          <div class="drill-detail">Rondo to stay sharp (8 min). Then fun penalty shootout — whole team, first side to 5 wins. GK gets reps too. Keep it loose, keep it fun. Fresh legs &gt; extra work the day before a game.</div>
+          <div class="drill-tip">Don't overwork them. A sharp, confident team beats a tired, over-drilled one. Protect the legs here.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">48–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Game Day Logistics + Team Moment</div>
+          <div class="drill-detail">Cover: arrival time, what to bring, warm-up routine, starting lineup (if ready). Share it confidently — "everyone will play." Then: a full team prayer. Coach leads it. Thank God for health, for this team, for the chance to compete. Ask for courage, teamwork, and to represent the school well. Close with chant — the loudest of pre-season.</div>
+          <div class="drill-faith">The team that prays together before a game remembers what the day is really about. It doesn't guarantee a win — it guarantees perspective.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========= IN-SEASON ========= -->
+<div id="phase-season" class="phase-panel">
+
+  <div class="phase-intro">
+    <div class="pi-tag">Phase 2 — Game Season</div>
+    <h2>In-Season Sessions</h2>
+    <p>1–2 games + 1–2 training sessions per week. Pick the right session type based on where you are in the week. The goal: arrive at every game fresh, focused, and unified.</p>
+  </div>
+
+  <div class="info-box dark">
+    <h3>In-Season Weekly Framework</h3>
+    <ul>
+      <li><strong>Day after game:</strong> Light or rest. No heavy training. Optional optional recovery touches.</li>
+      <li><strong>2+ days before a game:</strong> Use Session A (Fix) or Session C (Develop). Work harder here.</li>
+      <li><strong>Day before a game:</strong> Session B only. Light, sharp, confident. No heavy legs.</li>
+      <li><strong>Game day:</strong> Use the game-day warm-up every time — routine builds readiness.</li>
+    </ul>
+  </div>
+
+  <div class="week-label">In-Season Sessions <span class="week-theme">Pick Based on Week</span></div>
+
+  <div class="session-card" id="is1">
+    <div class="session-header" onclick="toggle('is1')">
+      <span class="s-day training">Session A</span>
+      <span class="s-title">Post-Game Fix (Address One Issue)</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle — Reset</div>
+          <div class="drill-detail">After a loss: acknowledge it once, genuinely. "We didn't get the result. Here's the one thing we're going to fix today." After a win: "Good. Now let's be better." Never skip the huddle. The tone you set here shapes the hour.</div>
+          <div class="drill-faith">How a team handles adversity is formed in these moments — not in the game. After a hard loss, a coach who stays steady and focused on growth teaches something that outlasts the season.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">High-Energy Rondo Warm-Up</div>
+          <div class="drill-detail">5v2, then 6v2. Fast pace. Gets energy up. No dwelling on the last game — get them moving and competing immediately.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–40</div>
+        <div class="drill-content">
+          <div class="drill-name">The One Fix — Choose Based on Last Game</div>
+          <div class="drill-detail">
+            <strong>Problem: Gave up goals from wide areas</strong><br>
+            → 2 defenders close down wide attacker, one blocks cross, one tracks runner. Repeat 10× each side. Include beginners as the tracking runner — clear role.<br><br>
+            <strong>Problem: Can't hold possession</strong><br>
+            → 4v4 possession in 20×20, no goals. 5 passes = 1 point. 2-touch max for advanced, unlimited for beginners. Teaches scanning and movement.<br><br>
+            <strong>Problem: Not creating chances</strong><br>
+            → Wall pass + combination drill. 4 attackers vs 2 defenders, finish on goal. Advanced players must play beginners in before shooting.<br><br>
+            <strong>Problem: Getting outworked (fitness/intensity)</strong><br>
+            → High-intensity 3v3 games, 90-second rounds, no rest between rounds. Winner stays. Competitive pressure = fitness.
+          </div>
+          <div class="drill-tip">Name the problem at the start. Name it clearly. "We gave up 3 goals from crosses. Today we fix that." Boys this age respond well to direct clarity — they want to know the problem is being taken seriously.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">40–55</div>
+        <div class="drill-content">
+          <div class="drill-name">Free Scrimmage</div>
+          <div class="drill-detail">No stops. Let them play. Watch for the fix being applied naturally. Reward it verbally in real time.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Wrap-Up</div>
+          <div class="drill-detail">"Did anyone use what we drilled today?" Take 2–3 answers. Close with a quick verse or encouragement. Chant out.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="is2">
+    <div class="session-header" onclick="toggle('is2')">
+      <span class="s-day training">Session B</span>
+      <span class="s-title">Pre-Game Prep (Day Before)</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Huddle — Game Eve Energy</div>
+          <div class="drill-detail">Build anticipation. "Tomorrow is our chance." Share the lineup. Address the opponent briefly: "They're competitive. So are we. Here's what matters: our shape and our effort." Keep it 2 points max.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Light Dynamic Warm-Up</div>
+          <div class="drill-detail">High knees, side shuffles, butt kicks, leg swings. Moderate pace. No intensity yet — this is activation, not conditioning.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–25</div>
+        <div class="drill-content">
+          <div class="drill-name">Set Piece Refresher</div>
+          <div class="drill-detail">Corners and free kicks — 3 reps each, no pressure. Reinforce memory. Calm, confident repetition only.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">25–50</div>
+        <div class="drill-content">
+          <div class="drill-name">Possession + Finishing — Light &amp; Fun</div>
+          <div class="drill-detail">Rondo to stay sharp (10 min). Then relaxed finishing — everyone takes 5 shots from their preferred spot. End with penalty competition: full squad, winner earns locker room bragging rights. Keep it FUN. Confidence goes into tomorrow's game.</div>
+          <div class="drill-tip">Energy here should be 7/10. Not flat — but not gassed. The game tomorrow is what matters.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">50–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Game Plan + Team Prayer</div>
+          <div class="drill-detail">Review: arrival time, warm-up plan, 2 tactical focuses. Captain speaks. Coach prays. Chant out — the loudest of the week.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="is3">
+    <div class="session-header" onclick="toggle('is3')">
+      <span class="s-day training">Session C</span>
+      <span class="s-title">Midseason Development (Skill Growth)</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+
+      <div class="drill-block">
+        <div class="drill-time">0–5</div>
+        <div class="drill-content">
+          <div class="drill-name">Opening Huddle</div>
+          <div class="drill-detail">Midseason check-in. "Where are we? Where do we want to be? Who has gotten better since Day 1?" Celebrate growth out loud. Verse: Hebrews 12:1 — "Run with perseverance the race set before us."</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">5–15</div>
+        <div class="drill-content">
+          <div class="drill-name">Technical Warm-Up + Juggle Check</div>
+          <div class="drill-detail">Ball at feet: inside/outside rolls, v-pull, toe taps. Then 2-minute juggle check — players beat their Day 1 number. Celebrate anyone who has improved.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">15–40</div>
+        <div class="drill-content">
+          <div class="drill-name">New Move of the Month (Differentiated)</div>
+          <div class="drill-detail">
+            <strong>Month 1:</strong> Step-Over — fake one direction, burst the other<br>
+            <strong>Month 2:</strong> Cruyff Turn — fake cross, drag ball back, turn away<br>
+            <strong>Month 3:</strong> Outside foot pass + overlap combination<br><br>
+            Teach → slow reps → full speed → apply in 2v1
+          </div>
+          <br>
+          <table class="diff-table">
+            <tr><th></th><th class="beg-col">◉ Beginner</th><th class="adv-col">◉ Advanced</th></tr>
+            <tr><td>Practice</td><td class="beg-col">Stationary cone as defender, unlimited reps</td><td class="adv-col">Live defender, full speed, finish on goal</td></tr>
+            <tr><td>Goal</td><td class="beg-col">Get the motion right</td><td class="adv-col">Use it 3× in the scrimmage — they announce it when they do</td></tr>
+          </table>
+          <div class="drill-tip">Advanced players announcing when they successfully use the move in the scrimmage = accountability + pride. They'll work harder to pull it off.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">40–55</div>
+        <div class="drill-content">
+          <div class="drill-name">Position Rotation Scrimmage</div>
+          <div class="drill-detail">Put players in unfamiliar spots. Defenders play striker. Midfielders defend. Builds empathy, develops versatility, and keeps it fresh midseason. Normal small-sided game with full energy.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">55–60</div>
+        <div class="drill-content">
+          <div class="drill-name">Cool-Down — Player-Led Stretch</div>
+          <div class="drill-detail">Rotate who leads the stretch each session. Today's stretch leader picks a teammate to give a genuine compliment to. Builds leadership and culture simultaneously.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="gday">
+    <div class="session-header" onclick="toggle('gday')">
+      <span class="s-day game">Game Day</span>
+      <span class="s-title">Pre-Game Warm-Up Routine</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="info-box sky" style="margin-bottom:12px">
+        <h3>Do This the Same Way Every Game</h3>
+        <ul>
+          <li>Routine = readiness. When the warm-up is the same, nerves settle and focus comes naturally.</li>
+          <li>Captain runs it. You observe and adjust only if needed.</li>
+        </ul>
+      </div>
+      <div class="drill-block">
+        <div class="drill-time">−30</div>
+        <div class="drill-content"><div class="drill-name">Arrive Together — Team Jog</div>
+        <div class="drill-detail">2 laps of the field as a team. Together. Sets collective focus immediately. No phones, no goofing off — helmets on from this moment.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">−25</div>
+        <div class="drill-content"><div class="drill-name">Dynamic Stretch (Team-Led)</div>
+        <div class="drill-detail">High knees, butt kicks, hip circles, side shuffles, leg swings. Captain leads. 5 minutes. Coach is silent.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">−20</div>
+        <div class="drill-content"><div class="drill-name">Passing Pairs + Rondo</div>
+        <div class="drill-detail">Quick passing pairs to get touches. Then 2-minute rondo to engage the mind. Eyes up, quick decisions.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">−10</div>
+        <div class="drill-content"><div class="drill-name">GK Warm-Up + Shape Walk-Through</div>
+        <div class="drill-detail">GK takes 10 saves and 3 distributions. Outfield: one kickoff position walk-through and first defensive shape. Quick and calm.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">−4</div>
+        <div class="drill-content"><div class="drill-name">Pre-Game Talk + Prayer</div>
+        <div class="drill-detail">2 tactical points max. "Today we _____ and _____." Captain speaks briefly. Coach prays — thank God, ask for safety, courage, unity. Then chant. Then go.</div>
+        <div class="drill-faith">Short talks win. Long pre-game speeches lose the room. Two clear points + prayer + chant = locked in.</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========= CULTURE & FAITH ========= -->
+<div id="phase-culture" class="phase-panel">
+
+  <div class="phase-intro">
+    <div class="pi-tag">Culture &amp; Faith Framework</div>
+    <h2>Building a Team That Lasts</h2>
+    <p>Xs and Os are what you teach. Culture is what they remember. Here's how to build both intentionally as the Covenant Classical Warriors.</p>
+  </div>
+
+  <div class="verse-card">
+    <div class="vc-verse">"Whatever you do, work at it with all your heart, as working for the Lord, not for human masters."</div>
+    <div class="vc-ref">Colossians 3:23 — Season anchor verse</div>
+  </div>
+
+  <div class="session-card" id="c1">
+    <div class="session-header" onclick="toggle('c1')">
+      <span class="s-day culture">Culture</span>
+      <span class="s-title">The 3 Non-Negotiables</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">①</div>
+        <div class="drill-content">
+          <div class="drill-name">Effort</div>
+          <div class="drill-detail">Full effort in everything — practice, games, warm-ups, drills. No coasting. If a player coasts, name it calmly and immediately: "That's not us." The standard applies to everyone equally — stars included. Half-hearted practice produces half-hearted games.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">②</div>
+        <div class="drill-content">
+          <div class="drill-name">Encouragement</div>
+          <div class="drill-detail">Teammates build each other up. Zero mockery of mistakes — in practice or games. Call teammates by name. Celebrate effort, not just skill. When a beginner does something right, the advanced players cheer loudest. Model this yourself every session.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">③</div>
+        <div class="drill-content">
+          <div class="drill-name">Excellence</div>
+          <div class="drill-detail">Do things right, not just fast. Excellence is doing the ordinary things with care — proper technique in warm-ups, correct defensive stance even when tired, looking before you pass every time. Frame it: "Col. 3:23. We don't do anything halfway because of who we're representing."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="c2">
+    <div class="session-header" onclick="toggle('c2')">
+      <span class="s-day culture">Weekly Verses</span>
+      <span class="s-title">Season Scripture Plan</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">Wk 1</div>
+        <div class="drill-content">
+          <div class="drill-name">Colossians 3:23</div>
+          <div class="drill-detail">"Whatever you do, work at it with all your heart, as working for the Lord." <em>Frame: Why we give full effort every session.</em></div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">Wk 2</div>
+        <div class="drill-content">
+          <div class="drill-name">Proverbs 27:17</div>
+          <div class="drill-detail">"As iron sharpens iron, so one person sharpens another." <em>Frame: Advanced players lifting beginners; teammates making each other better.</em></div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">Wk 3</div>
+        <div class="drill-content">
+          <div class="drill-name">2 Timothy 1:7</div>
+          <div class="drill-detail">"God has not given us a spirit of fear, but of power, love, and self-discipline." <em>Frame: Playing brave, controlled soccer in the first game.</em></div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">In-Season</div>
+        <div class="drill-content">
+          <div class="drill-name">Hebrews 12:1 / Romans 12:4–5 / Joshua 1:9 / Psalm 133:1</div>
+          <div class="drill-detail">Rotate through these in-season. Let the captain pick one per week from the list. Give them the context — they connect with a verse more when they chose it. Post-season: let players vote on the verse that meant the most.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="c3">
+    <div class="session-header" onclick="toggle('c3')">
+      <span class="s-day culture">Inclusion</span>
+      <span class="s-title">Managing Mixed Skill Levels Gracefully</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">🔑</div>
+        <div class="drill-content">
+          <div class="drill-name">Never rank players publicly</div>
+          <div class="drill-detail">Beginners know they're beginners. They don't need you to confirm it. Frame differentiated drills as "challenges" — the harder version is the advanced challenge, not the default. Every player is working on their own target.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">🔑</div>
+        <div class="drill-content">
+          <div class="drill-name">Private correction, public praise</div>
+          <div class="drill-detail">Correct technique privately (pull them aside or crouch down to their level). Praise publicly and specifically: not "good job" but "Marcus, that first touch was exactly right — you opened your body before the ball arrived."</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">🔑</div>
+        <div class="drill-content">
+          <div class="drill-name">Give beginners meaningful roles</div>
+          <div class="drill-detail">In games: every beginner has a specific job (e.g., "your only job is to be wide and available"). In drills: give them a version they can succeed at. Success builds confidence — confidence builds skill. Shame does not.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">🔑</div>
+        <div class="drill-content">
+          <div class="drill-name">Advanced players earn their status by serving</div>
+          <div class="drill-detail">Tell your best players directly: "Your job in practice is to make your teammates better. That's how you earn the right to be the difference-maker in games." This changes the dynamic from individual showboating to team building.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">🔑</div>
+        <div class="drill-content">
+          <div class="drill-name">Playing time philosophy</div>
+          <div class="drill-detail">At this age and this school context: everyone plays meaningful minutes. Not necessarily equal — you still want to compete — but no one should feel invisible. Set a minimum per player per game and honor it. Communicate it to parents early.</div>
+          <div class="drill-faith">Every player is made in the image of God and chosen for this team for a reason. They deserve to feel that.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="c4">
+    <div class="session-header" onclick="toggle('c4')">
+      <span class="s-day culture">Devotions</span>
+      <span class="s-title">3-Minute End-of-Practice Devotional Ideas</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">①</div>
+        <div class="drill-content"><div class="drill-name">The "Iron Sharpens Iron" Ask</div>
+        <div class="drill-detail">"Who made someone better today? Call out a teammate." Go around — at least 3–4 players share. Ends on encouragement and builds the habit of seeing each other.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">②</div>
+        <div class="drill-content"><div class="drill-name">Gratitude Round</div>
+        <div class="drill-detail">"One thing you're grateful for that has nothing to do with soccer." Quick go-around. Humanizes players to each other. Especially powerful after a tough loss.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">③</div>
+        <div class="drill-content"><div class="drill-name">Verse Response</div>
+        <div class="drill-detail">Read the week's verse. Ask: "What did you do today that matched this?" or "Where did you fall short?" 2–3 answers. Coach responds honestly too.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">④</div>
+        <div class="drill-content"><div class="drill-name">Silent 10 Seconds</div>
+        <div class="drill-detail">At the end of a big win or hard loss — coach says "10 seconds of silence as a team." No chant. Just stillness. Then chant. It signals that something bigger than the result just happened.</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========= COACH NOTES ========= -->
+<div id="phase-coach" class="phase-panel">
+
+  <div class="phase-intro">
+    <div class="pi-tag">Reference</div>
+    <h2>Coach's Notes</h2>
+    <p>Practical information you'll need throughout the season — formations, fitness, equipment, and halftime.</p>
+  </div>
+
+  <div class="session-card" id="cn1">
+    <div class="session-header" onclick="toggle('cn1')">
+      <span class="s-day tips">Tactics</span>
+      <span class="s-title">Formation &amp; 3 Team Principles</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">Form.</div>
+        <div class="drill-content">
+          <div class="drill-name">Recommended Formations</div>
+          <div class="drill-detail"><strong>7v7:</strong> 1-2-3-1 — two defenders, three midfielders, one striker. Clear roles, easy to teach.<br><strong>9v9:</strong> 1-3-2-3 — three defenders, two holding midfielders, three up front.<br><strong>11v11:</strong> 1-4-3-3 — classic, balanced, plays to athletic midfielders.</div>
+          <div class="drill-tip">Put your best athlete at defensive midfielder (not striker). They influence every possession and cover for defensive errors. It's the highest-impact position for a mixed-ability team.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">①</div>
+        <div class="drill-content">
+          <div class="drill-name">Press high immediately after losing possession</div>
+          <div class="drill-detail">The 3–4 seconds after you lose the ball is when you can win it back cheapest. Everyone presses toward the ball — not just forwards. Drill this until it's instinct.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">②</div>
+        <div class="drill-content">
+          <div class="drill-name">Play wide and cross</div>
+          <div class="drill-detail">At this age, defenses collapse toward center. Wide channels are almost always open. Train your wide players to receive and cross; train your center players to time runs. Simple but effective against any team.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">③</div>
+        <div class="drill-content">
+          <div class="drill-name">Two defenders always stay behind the ball</div>
+          <div class="drill-detail">No matter what. Even on corners. Even when you're losing. Prevents the catastrophic counterattack. Drill it at the start of every scrimmage until it's automatic.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="cn2">
+    <div class="session-header" onclick="toggle('cn2')">
+      <span class="s-day tips">Fitness</span>
+      <span class="s-title">Conditioning Philosophy</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">→</div>
+        <div class="drill-content"><div class="drill-name">Condition through the ball, not laps</div>
+        <div class="drill-detail">Intensive rondos, transition drills, and high-pressure small-sided games build soccer-specific fitness without boring running. 12–14 year olds disengage fast from pure cardio. Keep a ball involved at all times.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">→</div>
+        <div class="drill-content"><div class="drill-name">Watch for fatigue vs. effort</div>
+        <div class="drill-detail">If players jog through a scrimmage, add a constraint: "Can't score unless every outfield player has touched the ball this possession." Raises intensity without adding physical work.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">→</div>
+        <div class="drill-content"><div class="drill-name">Pre-game legs</div>
+        <div class="drill-detail">No intense training day before a game. The session before a game is for sharpness and confidence — not fitness gains. Overtrained 13-year-olds play flat.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">→</div>
+        <div class="drill-content"><div class="drill-name">Hydration reminder every session</div>
+        <div class="drill-detail">Build in a water break around the 20-minute mark and at the transition to the game. Middle schoolers often don't self-regulate hydration well. It affects performance and mood.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="cn3">
+    <div class="session-header" onclick="toggle('cn3')">
+      <span class="s-day tips">Halftime</span>
+      <span class="s-title">Halftime Script</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">1 min</div>
+        <div class="drill-content"><div class="drill-name">Water, breathe, settle</div>
+        <div class="drill-detail">Don't talk while they're still catching their breath. Let them drink and calm down first. You observe and organize your thoughts.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">1 min</div>
+        <div class="drill-content"><div class="drill-name">One thing we did well</div>
+        <div class="drill-detail">Name it specifically. "Our press in the first 10 minutes was excellent." Not generic — specific. They need to know what to keep doing.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">1 min</div>
+        <div class="drill-content"><div class="drill-name">One adjustment</div>
+        <div class="drill-detail">One thing only. "Their #7 keeps running in behind our left back. Left back, shift back 5 steps when the ball is on their right side." Specific, actionable, one player or one zone.</div></div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">30 sec</div>
+        <div class="drill-content"><div class="drill-name">Captain fires them up</div>
+        <div class="drill-detail">Captain gets the last word. Coach steps back. Chant. Go.</div>
+        <div class="drill-tip">Total halftime: 3.5 minutes max. Long halftimes lose the room. Short, clear, and fired up wins every time at this age.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="cn4">
+    <div class="session-header" onclick="toggle('cn4')">
+      <span class="s-day tips">Equipment</span>
+      <span class="s-title">What You Need Each Session</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">Must</div>
+        <div class="drill-content">
+          <div class="drill-name">Core Kit</div>
+          <div class="drill-detail">
+            • 18–20 cones (flat discs + tall poles)<br>
+            • 1 ball per player + 3 spare<br>
+            • Pinnies in 2 colors (8–10 each)<br>
+            • 2–4 small goals or cone goals<br>
+            • Whistle + stopwatch<br>
+            • Clipboard with session plan printed<br>
+            • Water station visible and accessible
+          </div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">Pro tip</div>
+        <div class="drill-content">
+          <div class="drill-name">Pre-Set the Field</div>
+          <div class="drill-detail">Arrive 10 minutes early and set your grids before players show up. Mark a standard 20×20 and 30×20 that you reuse all season. Dead setup time kills momentum and loses middle schoolers immediately.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">Nice</div>
+        <div class="drill-content">
+          <div class="drill-name">Coaching Addition</div>
+          <div class="drill-detail">Small whiteboard or notepad for halftime/team talks. Speeds up showing formations. Also: a way to track each player's juggling count and a "move they're working on" — review it monthly.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script>
+function showPhase(id) {
+  document.querySelectorAll('.phase-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('phase-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+function toggle(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+// Open first session
+document.getElementById('w1s1').classList.add('open');
+</script>
+</body>
+</html>
