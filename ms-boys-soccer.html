@@ -235,6 +235,82 @@ main { padding: 16px 14px 48px; max-width: 720px; margin: 0 auto; }
 .level-pill.beg { background: #F0F0F0; color: #3A3A3A; border: 1.5px solid var(--sky); }
 .level-pill.adv { background: #FBE4E7; color: #8C0F22; border: 1.5px solid var(--orange); }
 
+/* ── DRILL BANK ── */
+.bank-filter-row {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.bank-filter-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  background: #fff; border: 1.5px solid var(--light-gray);
+  color: var(--mud);
+  padding: 5px 12px; border-radius: 20px;
+  cursor: pointer; transition: all .15s;
+}
+.bank-filter-btn.active {
+  background: var(--mud); color: #fff; border-color: var(--mud);
+}
+.bank-filter-btn:hover:not(.active) { border-color: var(--gray); }
+
+.bank-category {
+  margin: 26px 0 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.bank-category-icon {
+  font-size: 18px; flex-shrink: 0;
+}
+.bank-category-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.03em;
+  color: var(--mud);
+}
+.bank-category-sub {
+  font-size: 12px; color: var(--gray); margin-left: auto;
+  flex-shrink: 0; white-space: nowrap;
+}
+
+.bank-card {
+  background: #fff; border-radius: 8px;
+  margin-bottom: 8px; overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  border-left: 4px solid var(--light-gray);
+}
+.bank-card[data-cat="warmup"] { border-left-color: var(--sky); }
+.bank-card[data-cat="technical"] { border-left-color: var(--orange); }
+.bank-card[data-cat="game"] { border-left-color: var(--grass); }
+.bank-card[data-cat="fitness"] { border-left-color: var(--gold); }
+.bank-card[data-cat="cooldown"] { border-left-color: var(--gray); }
+
+.bank-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; cursor: pointer; user-select: none;
+}
+.bank-time-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: #fff; background: var(--mud);
+  padding: 2px 8px; border-radius: 3px;
+  flex-shrink: 0; white-space: nowrap;
+}
+.bank-title {
+  font-weight: 600; font-size: 14px;
+  flex: 1; line-height: 1.3;
+}
+.bank-toggle {
+  font-size: 14px; color: var(--gray);
+  transition: transform .25s; flex-shrink: 0;
+}
+.bank-card.open .bank-toggle { transform: rotate(180deg); }
+.bank-body {
+  display: none; border-top: 1px solid var(--light-gray);
+  padding: 12px 14px;
+}
+.bank-card.open .bank-body { display: block; }
+.bank-body .drill-detail { margin-bottom: 0; }
+
 /* ── DRILL BLOCKS ── */
 .drill-block {
   display: flex; gap: 10px;
@@ -322,8 +398,11 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
   <button class="phase-btn" onclick="showPhase('pre2')">Week 2</button>
   <button class="phase-btn" onclick="showPhase('pre3')">Week 3</button>
   <button class="phase-btn" onclick="showPhase('season')">In-Season</button>
+  <button class="phase-btn" onclick="showPhase('bank')">Drill Bank</button>
+  <button class="phase-btn" onclick="showPhase('gk')">Goalkeepers</button>
   <button class="phase-btn" onclick="showPhase('culture')">Culture &amp; Faith</button>
   <button class="phase-btn" onclick="showPhase('coach')">Coach Notes</button>
+  <button class="phase-btn" onclick="showPhase('resources')">Resources</button>
 </nav>
 
 <main>
@@ -351,9 +430,19 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
     <ul>
       <li><strong>0–5 min</strong> — Team Huddle: energy-setter, verse</li>
       <li><strong>5–15 min</strong> — Dynamic Warm-Up (ball at feet)</li>
-      <li><strong>15–40 min</strong> — Technical Focus (differentiated by level)</li>
-      <li><strong>40–55 min</strong> — Competitive Game (mixed teams)</li>
+      <li><strong>15–35 min</strong> — Technical Focus (differentiated by level) — <em>trim this first if time is short</em></li>
+      <li><strong>35–55 min</strong> — Competitive Game (mixed teams) — <em>protect this block, it's where the learning sticks</em></li>
       <li><strong>55–60 min</strong> — Cool-Down + Devotional Moment</li>
+    </ul>
+  </div>
+
+  <div class="info-box gold">
+    <h3>Game Time Is the Priority, Not the Reward</h3>
+    <ul>
+      <li>Isolated drills teach a technique. Small-sided games teach a player <em>when</em> and <em>why</em> to use it under real pressure — that's where it actually sticks.</li>
+      <li>If a technical block runs long, cut it short. Never cut the scrimmage short to finish a drill.</li>
+      <li>Every drill block below is written with a target time — treat it as a ceiling, not a floor. If the team gets it in 10 minutes instead of 20, move to the game early.</li>
+      <li>When in doubt, default to more 3v3/4v4 game time and less standing-in-line drilling, especially in Weeks 2–3 and all of in-season.</li>
     </ul>
   </div>
 
@@ -401,6 +490,23 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
             <tr><td>Challenge</td><td class="beg-col">Beat your last score</td><td class="adv-col">One-touch through 3 gates in a row</td></tr>
           </table>
           <div class="drill-tip">Pair one beginner with one more experienced player. The experienced player practices leadership + weak foot. The beginner gets a mentor, not a lecture.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">~8</div>
+        <div class="drill-content">
+          <div class="drill-name">First Touch Under Pressure (Differentiated)</div>
+          <div class="drill-detail">Pairs, 5 yds apart. Server passes firm — not soft — and receiver must control it away from their feet into open space (not straight back to where it came from) before passing back. This is the single biggest separator between a chaotic team and a composed one. Don't skip it just because it looks simple.</div>
+          <br>
+          <table class="diff-table">
+            <tr><th></th><th class="beg-col">◉ Beginner</th><th class="adv-col">◉ Advanced</th></tr>
+            <tr><td>Pass speed</td><td class="beg-col">Moderate, rolling pass</td><td class="adv-col">Firm, driven pass</td></tr>
+            <tr><td>Touch</td><td class="beg-col">2 touches allowed (control, then pass)</td><td class="adv-col">1 touch to control and set, 1 to pass — no more</td></tr>
+            <tr><td>Add-on</td><td class="beg-col">None yet — just get a clean touch</td><td class="adv-col">Receiver must check shoulder before the ball arrives (look over shoulder for "pressure")</td></tr>
+          </table>
+          <div class="drill-tip">Coach the habit, not just the technique: "Cushion it away from pressure, not back into it." Say this phrase all season — it becomes instinct by mid-season.</div>
         </div>
       </div>
       <hr class="div">
@@ -787,20 +893,30 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
       <hr class="div">
 
       <div class="drill-block">
-        <div class="drill-time">30–45</div>
+        <div class="drill-time">30–42</div>
         <div class="drill-content">
           <div class="drill-name">Free Kicks + Wall Practice</div>
-          <div class="drill-detail">Kicks from 20–25 yds. Teach wall setup: 3–4 players, GK covers far post. Rotate who takes kicks — don't only give it to the advanced players. Beginners get reps too, even if the execution isn't perfect. After 8 attempts, practice crossing free kicks with runners attacking.</div>
+          <div class="drill-detail">Kicks from 20–25 yds. Teach wall setup: 3–4 players, GK covers far post. Rotate who takes kicks — don't only give it to the advanced players. Beginners get reps too, even if the execution isn't perfect. After 6 attempts, practice crossing free kicks with runners attacking.</div>
           <div class="drill-tip">Beginners taking free kicks in practice = confidence in games. The skill grows if they get reps.</div>
         </div>
       </div>
       <hr class="div">
 
       <div class="drill-block">
-        <div class="drill-time">45–55</div>
+        <div class="drill-time">42–47</div>
+        <div class="drill-content">
+          <div class="drill-name">Throw-In Routine — 2 Options</div>
+          <div class="drill-detail">Throw-ins happen constantly and almost never get practiced — fix that here. Teach 2 simple options: <strong>① Down the line</strong> — throw to a winger checking to the ball, who then plays it forward into space; <strong>② Flick-on</strong> — throw to a player with their back to goal near midfield, who flicks it first-time into space behind the defense for a runner. Run each option 4× from both sidelines. Remind throwers: both feet on the ground, ball behind the head, no foul throws.</div>
+          <div class="drill-tip">Two options, same as corners. Don't add more — a throw-in taker who has to think too hard just throws it straight to the nearest defender.</div>
+        </div>
+      </div>
+      <hr class="div">
+
+      <div class="drill-block">
+        <div class="drill-time">47–55</div>
         <div class="drill-content">
           <div class="drill-name">Scrimmage w/ Set Piece Triggers</div>
-          <div class="drill-detail">When a corner or free kick is earned, pause and run the actual play. Real-game reps in context.</div>
+          <div class="drill-detail">When a corner, free kick, or throw-in is earned, pause and run the actual play. Real-game reps in context.</div>
         </div>
       </div>
       <hr class="div">
@@ -987,7 +1103,7 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
         <div class="drill-time">15–25</div>
         <div class="drill-content">
           <div class="drill-name">Set Piece Review — No Pressure</div>
-          <div class="drill-detail">Walk through corners and free kicks. 3 reps each. No coaching — just reinforcing memory. If they do it wrong, just say "again" calmly. They know it by now.</div>
+          <div class="drill-detail">Walk through corners, free kicks, and your 2 throw-in options. 3 reps each. No coaching — just reinforcing memory. If they do it wrong, just say "again" calmly. They know it by now.</div>
         </div>
       </div>
       <hr class="div">
@@ -1131,7 +1247,7 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
         <div class="drill-time">15–25</div>
         <div class="drill-content">
           <div class="drill-name">Set Piece Refresher</div>
-          <div class="drill-detail">Corners and free kicks — 3 reps each, no pressure. Reinforce memory. Calm, confident repetition only.</div>
+          <div class="drill-detail">Corners, free kicks, and throw-in options — 3 reps each, no pressure. Reinforce memory. Calm, confident repetition only.</div>
         </div>
       </div>
       <hr class="div">
@@ -1163,6 +1279,14 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
       <span class="s-toggle">▾</span>
     </div>
     <div class="session-body">
+
+      <div class="info-box gold" style="margin-bottom: 14px">
+        <h3>Use This When the Week Allows</h3>
+        <ul>
+          <li>This session works best when you have 2+ days before the next game and the team isn't worn down. If the schedule is heavy (2 games that week, short rest), skip the new skill and run Session A or B instead.</li>
+          <li>Don't force the skill-of-the-month onto a tired or game-heavy week just to stay on schedule. Possession, conditioning, and confidence take priority over adding something new.</li>
+        </ul>
+      </div>
 
       <div class="drill-block">
         <div class="drill-time">0–5</div>
@@ -1267,6 +1391,609 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
         <div class="drill-faith">Short talks win. Long pre-game speeches lose the room. Two clear points + prayer = locked in.</div></div>
       </div>
     </div>
+  </div>
+
+</div>
+
+<!-- ========= DRILL BANK ========= -->
+<div id="phase-bank" class="phase-panel">
+
+  <div class="phase-intro">
+    <div class="pi-tag">Build-Your-Own Practice</div>
+    <h2>Drill Bank</h2>
+    <p>A grab-and-go library for any week the pre-built sessions don't fit. Pick one warm-up, one technical block, one game, add a cool-down — done. Aim for roughly 60 minutes total.</p>
+  </div>
+
+  <div class="info-box gold">
+    <h3>How to Assemble a Session Fast</h3>
+    <ul>
+      <li><strong>5–10 min</strong> — Pick one Warm-Up</li>
+      <li><strong>15–20 min</strong> — Pick one or two Technical blocks (mix a beginner-friendly one with a more challenging one if you have time for both)</li>
+      <li><strong>20–25 min</strong> — Pick one Small-Sided Game</li>
+      <li><strong>5 min</strong> — Pick one Cool-Down</li>
+      <li>Short on time? Drop a Technical block before you drop the Game. The game is where it sticks.</li>
+      <li>Coming off a tough loss or feeling stale? Check Fitness/Conditioning — most of these double as competitive games, so intensity doesn't feel like punishment.</li>
+    </ul>
+  </div>
+
+  <div class="bank-category">
+    <span class="bank-category-icon">🏃</span>
+    <span class="bank-category-title">Warm-Ups</span>
+    <span class="bank-category-sub">5–10 min each</span>
+  </div>
+
+  <div class="bank-card" data-cat="warmup">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">10 min</span>
+      <span class="bank-title">Dribble Maze</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Every player has a ball in a 20×20 grid. Coach calls commands: <em>Red light</em> (sole stop), <em>Green light</em> (dribble), <em>Blue</em> (inside turn), <em>Yellow</em> (outside chop). Gradually increase speed. Ends with 1 minute of freestyle — show your best move. Good early-season or as a refresher to check first-touch comfort.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="warmup">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">10 min</span>
+      <span class="bank-title">Cone Slalom + Juggling Station (Split)</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Half the team runs a timed slalom through 6 cones (20 yds), trying to beat their own time. Other half does a juggling count challenge. Swap after 5 minutes. Good for tracking individual improvement over the season.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="warmup">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">10 min</span>
+      <span class="bank-title">Pass-and-Move</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Two lines at midfield cones. Pass across, follow your pass to the opposite line. After 3 minutes, add: sprint to a wide cone after passing, then rejoin the opposite line. Simple, low-setup, gets bodies moving with a ball involved.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="warmup">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">10 min</span>
+      <span class="bank-title">Agility + Sprint Bursts</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Cone patterns or ladder drills: 2-feet-in, lateral shuffle, in-out. Then 4× 20 yd sprint at 80% effort with a recovery walk back. Use this before a high-tempo technical block or transition game — primes the legs for speed.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="warmup">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">5–10 min</span>
+      <span class="bank-title">Rondo 5v2 or 6v2</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">5 or 6 players keep the ball away from 2 defenders in a 12–15 yd circle. Two-touch max. Defenders earn a point for winning the ball in under 8 passes. High energy, gets everyone's head up and passing sharp right away — works as a warm-up at any point in the season.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="warmup">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">5 min</span>
+      <span class="bank-title">Team Juggling Challenge</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Everyone juggles at once. Drop the ball, sit down (but keep your own count going from memory). Last one standing gets nothing but pride. Quick way to loosen up a tired or tense team — works well after a loss or before a fun, light session.</div>
+    </div>
+  </div>
+
+  <div class="bank-category">
+    <span class="bank-category-icon">⚙️</span>
+    <span class="bank-category-title">Technical Blocks</span>
+    <span class="bank-category-sub">15–25 min each</span>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">20 min</span>
+      <span class="bank-title">Passing Gates (Differentiated)</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Scatter 10 cone gates (2 cones, 2 yds apart) across the field. Pairs pass through as many gates as possible in 4 minutes, then try to beat their score.<br><br>
+      <strong>Beginner:</strong> 5–8 yd passes, wide gates, unlimited touches, dominant foot fine.<br>
+      <strong>Advanced:</strong> 10–15 yds, narrow gates, 2-touch max, must alternate feet each pass.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">8 min</span>
+      <span class="bank-title">First Touch Under Pressure (Differentiated)</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Pairs, 5 yds apart. Server passes firm — not soft — and receiver must control it away from their feet into open space before passing back.<br><br>
+      <strong>Beginner:</strong> moderate rolling pass, 2 touches allowed.<br>
+      <strong>Advanced:</strong> firm driven pass, 1 touch to control/set and 1 to pass, must check shoulder before the ball arrives.<br><br>
+      Coaching cue: "Cushion it away from pressure, not back into it." Good recurring block all season — this skill never stops being worth reps.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">20 min</span>
+      <span class="bank-title">Move of the Day: Cut-Back Turn (Differentiated)</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Dribble toward a cone, chop the ball back with the inside foot, accelerate away. Teach → slow reps → full speed → line drill attacking a standing coach.<br><br>
+      <strong>Beginner:</strong> slow approach, cone defender only, no finish required.<br>
+      <strong>Advanced:</strong> sprint approach, live defender, turn + shot on goal.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">20 min</span>
+      <span class="bank-title">Shooting Circuit — 3 Stations (Differentiated)</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">3 stations, 5–6 min each, rotate: ① Straight-on shot ② Rolling ball finish ③ Turn and shoot.<br><br>
+      <strong>Beginner:</strong> closer range, stationary or slow feed, extra touch allowed before shooting.<br>
+      <strong>Advanced:</strong> longer range, first-time finish required, no second touch.<br><br>
+      Coaching cue: "Pick a corner — always have a target."</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">15–20 min</span>
+      <span class="bank-title">Shadow Defending Footwork + 1v1 Delay Drill</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Pairs mirror defensive stance (low, balanced, goalside) for 5 min, then move to live 1v1: attacker starts 20 yds out, defender 5 yds away, job is to delay and force to the weak side — not win the ball immediately.<br><br>
+      <strong>Beginner defender:</strong> success = stay in front for 5 seconds without lunging.<br>
+      <strong>Advanced defender:</strong> success = force weak side AND win the ball cleanly.<br><br>
+      Praise the patient defender loudly — lunging is the habit to break at this age.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">15 min</span>
+      <span class="bank-title">New Move of the Month (Differentiated)</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Rotate through a season-long menu: Step-Over (fake one way, burst the other), Cruyff Turn (fake cross, drag back, turn away), or outside-foot pass + overlap combo. Teach → slow reps → full speed → apply in a 2v1.<br><br>
+      <strong>Beginner:</strong> stationary cone as defender, unlimited reps, goal is just getting the motion right.<br>
+      <strong>Advanced:</strong> live defender, full speed, finish on goal — announce it out loud when they pull it off in the scrimmage.<br><br>
+      Use on a week with 2+ rest days. Skip it on a heavy game week.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">15 min</span>
+      <span class="bank-title">Playing Out of the Back (Differentiated)</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Half-field. GK + 3 defenders build out against 2 high-press attackers. Goal: play the ball past midfield without booting it long.<br><br>
+      <strong>Beginner:</strong> attackers press at half speed, GK can hold 5 seconds before distributing.<br>
+      <strong>Advanced:</strong> full-speed press, must maintain possession through midfield, GK has 3 seconds to distribute.<br><br>
+      Praise the brave short pass under pressure every time — that's the behavior that wins close games.</div>
+    </div>
+  </div>
+
+  <div class="bank-category">
+    <span class="bank-category-icon">🥅</span>
+    <span class="bank-category-title">Set Pieces</span>
+    <span class="bank-category-sub">10–20 min each</span>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">15 min</span>
+      <span class="bank-title">Corner Kicks — 2 Plays</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail"><strong>Play 1 (Near-post flick):</strong> one runner attacks near post, everyone else creates space.<br><strong>Play 2 (Short corner):</strong> ball to a player at the edge of the box, cross from a wider angle.<br><br>5 reps each, both sides, against a defensive wall for realistic pressure. Keep it to 2 plays — more than that gets forgotten.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">12 min</span>
+      <span class="bank-title">Free Kicks + Wall Practice</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Kicks from 20–25 yds. Teach wall setup (3–4 players, GK covers far post). Rotate who takes kicks — give beginners reps too. After 6 attempts, practice crossing free kicks with runners attacking.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="technical">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">5 min</span>
+      <span class="bank-title">Throw-In Routine — 2 Options</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail"><strong>① Down the line</strong> — throw to a winger checking to the ball, who plays it forward into space.<br><strong>② Flick-on</strong> — throw to a player with back to goal near midfield, who flicks it first-time into space behind the defense.<br><br>4 reps each, both sidelines. Both feet on the ground, ball behind the head, no foul throws. Two options only — don't overload the thrower's decision-making.</div>
+    </div>
+  </div>
+
+  <div class="bank-category">
+    <span class="bank-category-icon">⚽</span>
+    <span class="bank-category-title">Small-Sided Games</span>
+    <span class="bank-category-sub">10–20 min each</span>
+  </div>
+
+  <div class="bank-card" data-cat="game">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">15–20 min</span>
+      <span class="bank-title">4v4 Passing Game (No Goals)</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">30×20 yd grid. Score by passing through a cone gate — no shooting. Must complete 3 passes before scoring. Mix skill levels on each team. <strong>Advanced add-on:</strong> 5 passes in a row makes the next gate worth double, rewarding patience even from your strongest players.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="game">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">10 min</span>
+      <span class="bank-title">King of the Square (1v1)</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">10×10 yd grids, pairs. Attacker dribbles to cross defender's end line; defender tries to knock the ball out. 45 seconds per round, winners rotate to new grids. <strong>Beginner tweak:</strong> defender can only shuffle side to side, no tackling, to build attacker confidence first.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="game">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">10 min</span>
+      <span class="bank-title">3v1 Into Goal</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">3 attackers vs 1 defender + GK, starting from midfield. Mix one advanced player with two beginners — the advanced player's job is to set teammates up, not score alone. Bonus point if a beginner scores. Great for teaching facilitation over solo play.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="game">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">15 min</span>
+      <span class="bank-title">5v5 Defensive Points Game</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Normal 5v5, but award points beyond goals: 1 pt for a clean tackle, 2 pts for a GK save + distribution, 3 pts for a clean 2-minute defensive spell. Shifts the mindset from goals-only to total performance — good after a game where defending was the issue.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="game">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">20 min</span>
+      <span class="bank-title">Transition Game: Win It, Use It</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">3v3 in a 25×20 grid, two small goals. When possession changes, the new team must get a shot within 6 seconds or possession resets. <strong>Beginner:</strong> 8-second window. <strong>Advanced:</strong> 4-second window, must switch direction before shooting. Teaches immediate forward thinking after a turnover.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="game">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">15 min</span>
+      <span class="bank-title">3v2 Counterattack Waves</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">3 attackers at midfield, 2 defenders at the 18. Coach passes, attackers go immediately. Wide players stay wide, ball carrier commits the defender, passes early. After each rep, 2 attackers become defenders for the next wave. Put beginners as wide runners for a clear, achievable role.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="game">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">10 min</span>
+      <span class="bank-title">4v4 Dribble-to-Score</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Goals replaced by end lines — score by dribbling over the line, no shooting required. Rewards ball carriers taking players on. Good pairing with any dribbling-focused technical block.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="game">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">15–20 min</span>
+      <span class="bank-title">Position Rotation Scrimmage</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Normal small-sided game, but put players in unfamiliar spots — defenders play striker, midfielders defend. Builds versatility and empathy for teammates' roles, and keeps a midseason practice fresh.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="game">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">Open</span>
+      <span class="bank-title">Free Scrimmage</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">No stoppages. Let them play. Best when you want to see natural tendencies, reward a specific fix in real time, or just need the team to enjoy soccer after a heavy technical stretch.</div>
+    </div>
+  </div>
+
+  <div class="bank-category">
+    <span class="bank-category-icon">🔥</span>
+    <span class="bank-category-title">Fitness &amp; Conditioning</span>
+    <span class="bank-category-sub">through the ball, not laps</span>
+  </div>
+
+  <div class="bank-card" data-cat="fitness">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">10 min</span>
+      <span class="bank-title">High-Intensity 3v3, 90-Second Rounds</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">3v3, 90 seconds per round, no rest between rounds, winner stays on. Competitive pressure builds fitness without it feeling like a punishment. Good for a team that looked outworked in the last game.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="fitness">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">Add-on</span>
+      <span class="bank-title">Touch-Everyone Constraint</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Add to any scrimmage: a team can't score unless every outfield player has touched the ball during that possession. Raises movement and intensity without adding separate fitness work — use it if the team is jogging through a normal scrimmage.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="fitness">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">8 min</span>
+      <span class="bank-title">Sprint + Recover Pairs</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Pairs: one sprints 20 yds, turns, receives a pass, passes back. Repeat 5× each. Mimics the sprint/recover rhythm of a real game better than a flat-out conditioning run.</div>
+    </div>
+  </div>
+
+  <div class="bank-category">
+    <span class="bank-category-icon">🧘</span>
+    <span class="bank-category-title">Cool-Downs</span>
+    <span class="bank-category-sub">5 min each</span>
+  </div>
+
+  <div class="bank-card" data-cat="cooldown">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">5 min</span>
+      <span class="bank-title">Shout-Out Circle</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Light stretch, then go around the circle: "Who made a teammate better today?" Call out a name. Builds the habit of noticing each other, not just results.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="cooldown">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">5 min</span>
+      <span class="bank-title">Verse Response</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Read the week's verse. Ask: "What did you do today that matched this?" or "Where did you fall short?" Take 2–3 answers. Coach responds honestly too.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="cooldown">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">5 min</span>
+      <span class="bank-title">Player-Led Stretch</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">Rotate who leads the stretch each session. That player picks a teammate to give a genuine, specific compliment to. Builds leadership and culture at the same time.</div>
+    </div>
+  </div>
+
+  <div class="bank-card" data-cat="cooldown">
+    <div class="bank-header" onclick="toggleBank(this.parentElement)">
+      <span class="bank-time-tag">1 min</span>
+      <span class="bank-title">Silent 10 Seconds</span>
+      <span class="bank-toggle">▾</span>
+    </div>
+    <div class="bank-body">
+      <div class="drill-detail">After a big win or a hard loss: "10 seconds of silence as a team." No words, just stillness. Signals that something bigger than the result just happened.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========= GOALKEEPERS ========= -->
+<div id="phase-gk" class="phase-panel">
+
+  <div class="phase-intro">
+    <div class="pi-tag">Position-Specific Training</div>
+    <h2>Goalkeeper Development</h2>
+    <p>Your goalkeeper touches the ball less than anyone but can decide more games than anyone. They need dedicated reps every session — not leftover attention at the end.</p>
+  </div>
+
+  <div class="info-box gold">
+    <h3>How to Run This</h3>
+    <ul>
+      <li>If you have an assistant coach or a parent volunteer comfortable with the basics, have them break off with your goalkeeper(s) for about <strong>20 minutes per session</strong> while the rest of the team works on outfield drills.</li>
+      <li>If you're coaching solo, fold a shorter 10-minute GK block into the warm-up or technical window — see the "Solo Coach" note in each block below.</li>
+      <li>Rotate 2–3 players through GK over preseason, even if you know who your primary starter will be. Every team needs a backup who isn't seeing the position for the first time in a game.</li>
+      <li>This tab is a standing menu — pull blocks from it and slot them into the 20-minute GK window during any Week 1–3 or in-season session.</li>
+    </ul>
+  </div>
+
+  <div class="week-label">Core GK Blocks <span class="week-theme">Rotate Through These All Season</span></div>
+
+  <div class="session-card open" id="gk1">
+    <div class="session-header" onclick="toggle('gk1')">
+      <span class="s-day training">Block 1</span>
+      <span class="s-title">Footwork &amp; Handling Basics</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">~5</div>
+        <div class="drill-content">
+          <div class="drill-name">Footwork Warm-Up</div>
+          <div class="drill-detail">Quick lateral shuffles between two cones 6 yds apart, staying low, hands ready. Add: coach calls "set" — keeper drops into ready stance (knees bent, hands out front, weight on toes). 5 sets of 20 seconds.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">~10</div>
+        <div class="drill-content">
+          <div class="drill-name">Handling: W-Catches</div>
+          <div class="drill-detail">Coach or partner throws/rolls balls at chest height from 8 yds. Keeper catches with hands forming a "W" behind the ball, pulls it into the chest immediately. 10 reps. Then add balls slightly to each side — keeper must move feet first, hands second.</div>
+          <div class="drill-tip">The #1 youth keeper mistake is catching with the ball still out at arm's length instead of pulling it in. Say "secure it" every single rep until it's automatic.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">~5</div>
+        <div class="drill-content">
+          <div class="drill-name">Low Ball Collection</div>
+          <div class="drill-detail">Rolled balls along the ground from 10 yds. Keeper gets body behind the ball, scoops with both hands, one knee down on the ground behind the ball as a backstop. 8 reps, alternating sides.</div>
+        </div>
+      </div>
+      <div class="drill-tip" style="margin-top:10px">Solo Coach: fold this into the team warm-up — pair the keeper with a partner doing the same rolling/throwing pattern for 10 minutes while everyone else dribbles.</div>
+    </div>
+  </div>
+
+  <div class="session-card" id="gk2">
+    <div class="session-header" onclick="toggle('gk2')">
+      <span class="s-day training">Block 2</span>
+      <span class="s-title">Diving &amp; Shot-Stopping</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">~5</div>
+        <div class="drill-content">
+          <div class="drill-name">Collapse Dive Technique (No Ball)</div>
+          <div class="drill-detail">From the ready stance, practice the step-and-collapse motion to each side without a ball first — step toward the target with the near foot, drop the hip, land on the side (not the stomach or back). 6 reps each side, slow and controlled. Build the motor pattern before adding speed or a ball.</div>
+          <div class="drill-tip">Don't rush to add a ball. A keeper who dives correctly without one will dive correctly with one. A keeper who never learns the mechanic will develop bad habits that are hard to undo later.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">~10</div>
+        <div class="drill-content">
+          <div class="drill-name">Low Diving Saves</div>
+          <div class="drill-detail">Coach rolls or gently kicks balls just out of reach to each side, 6–8 yds away. Keeper dives to collect using the technique above. 5 reps each side. Increase distance slightly as they improve — never increase speed and distance at the same time.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">~5</div>
+        <div class="drill-content">
+          <div class="drill-name">Reaction Shots</div>
+          <div class="drill-detail">From 12 yds, coach or a player strikes moderate-pace shots at the keeper — mix of low, high, and to both sides. Focus on getting body behind the ball and secure handling, not just blocking it away. 10 shots.</div>
+        </div>
+      </div>
+      <div class="drill-tip" style="margin-top:10px">Solo Coach: this is the block worth a parent volunteer for, even just to roll/kick balls consistently. If truly solo, run it as a 10-minute station at the start of the shooting circuit (Day 3) while the rest of the team rotates through the other stations.</div>
+    </div>
+  </div>
+
+  <div class="session-card" id="gk3">
+    <div class="session-header" onclick="toggle('gk3')">
+      <span class="s-day training">Block 3</span>
+      <span class="s-title">Distribution</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">~7</div>
+        <div class="drill-content">
+          <div class="drill-name">Throwing — Overarm &amp; Bowl</div>
+          <div class="drill-detail">Practice both: the overarm javelin-style throw for distance to a winger, and the low bowl/roll for a quick, accurate pass to a nearby defender restarting play. 8 reps each style, both to the left and right.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">~7</div>
+        <div class="drill-content">
+          <div class="drill-name">Goal Kicks &amp; Punts</div>
+          <div class="drill-detail">10 goal kicks off the ground focusing on a consistent target (a teammate or zone, not just "far"). Then 10 punts out of hands, same focus on accuracy over distance. Praise a well-placed short kick to a teammate over a long one that goes straight out of bounds.</div>
+          <div class="drill-tip">Middle school keepers often think distribution means "kick it as far as possible." Teach them early that a 15-yard pass to a teammate's feet beats a 40-yard kick that gives the ball straight back to the other team.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">~6</div>
+        <div class="drill-content">
+          <div class="drill-name">Quick Distribution Under Pressure</div>
+          <div class="drill-detail">Coach passes the ball back to the keeper like a back-pass. Keeper must control and distribute within 3 seconds to a target player making a run. Builds the habit of fast, decisive choices instead of panicking under pressure.</div>
+        </div>
+      </div>
+      <div class="drill-tip" style="margin-top:10px">Solo Coach: tie this into the "Building Out of the Back" drill in Week 3, Day 7 — the keeper is already part of that drill, so the distribution reps come built in.</div>
+    </div>
+  </div>
+
+  <div class="session-card" id="gk4">
+    <div class="session-header" onclick="toggle('gk4')">
+      <span class="s-day training">Block 4</span>
+      <span class="s-title">Commanding Crosses &amp; the Box</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">~8</div>
+        <div class="drill-content">
+          <div class="drill-name">Catching Crosses</div>
+          <div class="drill-detail">A server crosses balls in from the wing (start slow and easy, build up pace). Keeper practices timing the run, catching at the highest point, and calling "Keeper!" loudly before coming for it. 8–10 reps from both sides.</div>
+          <div class="drill-tip">The call matters as much as the catch. A keeper who comes for a cross without calling for it is the #1 cause of collisions and own goals at this age. Drill the call every single time, even in practice.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">~7</div>
+        <div class="drill-content">
+          <div class="drill-name">1v1 Breakaway Decision-Making</div>
+          <div class="drill-detail">Attacker starts at midfield, dribbles in alone on goal. Keeper must decide: stay big and stand tall, or come out and close the angle/space. Run 6 reps. After each one, ask the keeper what they saw and why they chose that response.</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">~5</div>
+        <div class="drill-content">
+          <div class="drill-name">Communication with Defenders</div>
+          <div class="drill-detail">During any 4v4 or 5v5 team drill, specifically coach the keeper to talk: "Step up," "I've got it," "Man on," "Time" (when a defender has time on the ball). This isn't a separate drill — it's a standing instruction to apply during every scrimmage all season.</div>
+        </div>
+      </div>
+      <div class="drill-tip" style="margin-top:10px">Solo Coach: the 1v1 breakaway drill doubles as a finishing drill for outfield players — run it as a shared station so the keeper gets reps while strikers do too.</div>
+    </div>
+  </div>
+
+  <div class="info-box sky">
+    <h3>Season-Long GK Notes</h3>
+    <ul>
+      <li>Don't make the same player keeper every single practice. Rotating reps through 2–3 players keeps your backup ready and gives your primary keeper a break from getting shot at constantly.</li>
+      <li>A keeper learns more from 15 focused minutes than 45 unfocused ones. Quality of reps beats quantity — give clear feedback on every rep rather than just feeding balls continuously.</li>
+      <li>Praise communication and decision-making as much as the saves themselves. A keeper who organizes the defense well prevents more goals than one who just makes dramatic diving stops.</li>
+      <li>Build in 5 minutes for the keeper to also get outfield touches sometimes — rotate the GK position based on practice plan so no one player loses their feel for playing out.</li>
+    </ul>
   </div>
 
 </div>
@@ -1678,6 +2405,182 @@ hr.div { border: none; border-top: 1px dashed var(--light-gray); margin: 11px 0;
   </div>
 
 </div>
+
+<!-- ========= RESOURCES ========= -->
+<div id="phase-resources" class="phase-panel">
+
+  <div class="phase-intro">
+    <div class="pi-tag">Coach's Library</div>
+    <h2>Resources</h2>
+    <p>A running list of places to find more drills and coaching ideas. Add your own links as you find them — this is meant to grow over the season.</p>
+  </div>
+
+  <div class="session-card open" id="res1">
+    <div class="session-header" onclick="toggle('res1')">
+      <span class="s-day tips">Free</span>
+      <span class="s-title">Drill Libraries &amp; Session Plans</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">1</div>
+        <div class="drill-content">
+          <div class="drill-name">US Soccer / US Youth Soccer Resource Hub</div>
+          <div class="drill-detail">Free, age-banded session plans built by the national federation. [Add link here]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">2</div>
+        <div class="drill-content">
+          <div class="drill-name">SoccerDrive.com</div>
+          <div class="drill-detail">Searchable drill database by age and topic, includes diagrams. [Add link here]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">3</div>
+        <div class="drill-content">
+          <div class="drill-name">Soccerxpert.com — U13–U16 Section</div>
+          <div class="drill-detail">Drills banded specifically for this age group. [Add link here]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">4</div>
+        <div class="drill-content">
+          <div class="drill-name">TOCA Football Drill Guide</div>
+          <div class="drill-detail">Clear setup instructions, good for younger-skewing drills that still transfer well. [Add link here]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">5</div>
+        <div class="drill-content">
+          <div class="drill-name">planet.training</div>
+          <div class="drill-detail">Large drill database, useful once you know the category you're looking for. [Add link here]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="res2">
+    <div class="session-header" onclick="toggle('res2')">
+      <span class="s-day tips">Courses</span>
+      <span class="s-title">Coaching Education</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">1</div>
+        <div class="drill-content">
+          <div class="drill-name">US Soccer Learning Center — Grassroots Courses</div>
+          <div class="drill-detail">Free short online modules on running sessions, not just drill lists. [Add link here]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">2</div>
+        <div class="drill-content">
+          <div class="drill-name">Complete Soccer Coaching Curriculum (3–18 Year Olds)</div>
+          <div class="drill-detail">Free, in-depth PDF on age-appropriate coaching philosophy — useful for building your own sessions once you know your roster. [Add link here]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">3</div>
+        <div class="drill-content">
+          <div class="drill-name">Coming soon</div>
+          <div class="drill-detail">[Add resource here]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="res3">
+    <div class="session-header" onclick="toggle('res3')">
+      <span class="s-day tips">Goalkeeper</span>
+      <span class="s-title">GK-Specific Resources</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">1</div>
+        <div class="drill-content">
+          <div class="drill-name">Coming soon</div>
+          <div class="drill-detail">[Add resource here]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">2</div>
+        <div class="drill-content">
+          <div class="drill-name">Coming soon</div>
+          <div class="drill-detail">[Add resource here]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="res4">
+    <div class="session-header" onclick="toggle('res4')">
+      <span class="s-day tips">Video</span>
+      <span class="s-title">YouTube Channels &amp; Video Resources</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">1</div>
+        <div class="drill-content">
+          <div class="drill-name">Coming soon</div>
+          <div class="drill-detail">[Add resource here]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">2</div>
+        <div class="drill-content">
+          <div class="drill-name">Coming soon</div>
+          <div class="drill-detail">[Add resource here]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">3</div>
+        <div class="drill-content">
+          <div class="drill-name">Coming soon</div>
+          <div class="drill-detail">[Add resource here]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="session-card" id="res5">
+    <div class="session-header" onclick="toggle('res5')">
+      <span class="s-day tips">Local</span>
+      <span class="s-title">League &amp; Local Resources</span>
+      <span class="s-toggle">▾</span>
+    </div>
+    <div class="session-body">
+      <div class="drill-block">
+        <div class="drill-time">1</div>
+        <div class="drill-content">
+          <div class="drill-name">Coming soon</div>
+          <div class="drill-detail">[Add resource here — e.g. league rules, field info, referee contacts]</div>
+        </div>
+      </div>
+      <hr class="div">
+      <div class="drill-block">
+        <div class="drill-time">2</div>
+        <div class="drill-content">
+          <div class="drill-name">Coming soon</div>
+          <div class="drill-detail">[Add resource here]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 </main>
 
 <script>
@@ -1689,6 +2592,9 @@ function showPhase(id) {
 }
 function toggle(id) {
   document.getElementById(id).classList.toggle('open');
+}
+function toggleBank(card) {
+  card.classList.toggle('open');
 }
 // Open first session
 document.getElementById('w1s1').classList.add('open');
